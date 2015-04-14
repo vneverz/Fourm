@@ -1,1 +1,14 @@
-<h1>Hello, World!</h1>
+<table class="table">
+<tr>
+  <th>標題</th>
+  <th>作者</th>
+</tr>
+<% @articles.each do |t| %>
+  <tr>
+    <td><%= t.title %></td>
+    <td>?</td>
+  </tr>
+<% end %>
+</table>
+
+<%= paginate @articles %>
