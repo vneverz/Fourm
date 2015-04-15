@@ -1,5 +1,6 @@
 <p><%= link_to "回到首頁", articles_path, :class => "btn btn-primary" %></p>
 <h2><%= @article.title %> <small><%= @article.user.username %></small></h2>
+<%= user_gavatar(@article.user) %>
 
 <%= simple_format @article.description %>
 
@@ -11,11 +12,13 @@
 <div class="media">
   <div class="media-left">
     <a href="#">
-      <img class="media-object" src="..." alt="...">
+      <% if comment.user %>
+        <%= user_gavatar comment.user %>
+      <% end %>
     </a>
   </div>
   <div class="media-body">
-    <h4 class="media-heading"><%= comment.author_name %></h4>
+    <h4 class="media-heading"><%= comment.user.username %></h4>
     <%= simple_format comment.content %>
     <p class="text-right"><%= comment.created_at.to_s(:short) %></p>
   </div>
