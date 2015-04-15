@@ -4,11 +4,11 @@ class CreateArticles < ActiveRecord::Migration
       t.string :title
       t.text :description
       t.boolean :is_public
-      t.integer :comments_count
+      t.integer :comments_count, :default => 0
       t.integer :user_id
 
       t.timestamps null: false
     end
-    add_index :articles, :user_id
+      add_index :articles, :user_id
   end
 end

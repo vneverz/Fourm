@@ -4,12 +4,14 @@
   <th>標題</th>
   <th>作者</th>
   <th>發文時間</th>
+  <th>留言</th>
 </tr>
 <% @articles.each do |t| %>
   <tr>
     <td><%= link_to t.title, article_path(t) %></td>
     <td><%= t.user.username %></td>
     <td><%= t.created_at.to_s(:short) %></td>
+    <td><%= t.comments_count %></td>
   </tr>
 <% end %>
 </table>
