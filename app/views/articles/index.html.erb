@@ -6,7 +6,7 @@
 <% @articles.each do |t| %>
   <tr>
     <td><%= t.title %></td>
-    <td>?</td>
+    <td><%= t.user.username %></td>
   </tr>
 <% end %>
 </table>
