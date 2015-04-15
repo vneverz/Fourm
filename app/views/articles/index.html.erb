@@ -1,3 +1,4 @@
+<p><%= link_to "新增文章", new_article_path, :class => "btn btn-primary" %></p>
 <table class="table">
 <tr>
   <th>標題</th>
@@ -6,7 +7,7 @@
 <% @articles.each do |t| %>
   <tr>
     <td><%= t.title %></td>
-    <td><%= t.user.username %></td>
+    <td>?</td>
   </tr>
 <% end %>
 </table>

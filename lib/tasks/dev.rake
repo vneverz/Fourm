@@ -1,7 +1,15 @@
+#只要資料庫有關聯，就可以直接fake
 namespace :dev do
 
   task :fake => :environment do
     puts "Fake data..."
+    User.delete_all
+    Article.delete_all
+    Comment.delete_all
+
+    20.times do |n|
+      User.create( :username => Faker::Internet.user_name, :birthday => Faker::Date.backward(14), :email => Faker::Internet.email )
+    end
 
     100.times do |i|
       puts "Generate article #{i}"
@@ -12,7 +20,5 @@ namespace :dev do
         t.comments.create( :content => Faker::Lorem.paragraph  )
       end
     end
-
   end
-
 end
