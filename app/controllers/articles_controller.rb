@@ -2,6 +2,8 @@ class ArticlesController < ApplicationController
    before_action :authenticate_user!, :only => [:new, :create, :destroy]
   def index
     @articles = Article.page(params[:page])
+    @q = Article.ransack(params[:q])
+    @articles = @q.result(distinct: true).page(params[:page])
   end
   def show
     @article = Article.find(params[:id])

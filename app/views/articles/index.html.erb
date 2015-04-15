@@ -1,6 +1,17 @@
 <p><%= link_to "新增文章", new_article_path, :class => "btn btn-primary" %></p>
 <table class="table">
 <tr>
+<%= search_form_for @q do |f| %>
+
+  <%= f.label :title_cont %>
+  <%= f.search_field :title_cont %>
+  <%= f.submit %>
+
+<% end %>
+<p class="text-right">
+<%= sort_link(@q, :comments_count, "回覆數", default_order: :desc) %>
+<%= sort_link(@q, :created_at, "張貼時間", default_order: :desc) %>
+</p>
   <th>標題</th>
   <th>作者</th>
   <th>發文時間</th>
