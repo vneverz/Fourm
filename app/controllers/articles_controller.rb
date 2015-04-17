@@ -1,13 +1,22 @@
 class ArticlesController < ApplicationController
    before_action :authenticate_user!, :only => [:new, :create, :destroy]
   def index
-    @articles = Article.page(params[:page])
     @q = Article.ransack(params[:q])
+    if params[:cid]
+      category = Category.find(params[:cid])
+      @articles = category.articles
+    else
+      @articles = Article.all
+    end
+
+    @q = @articles.ransack(params[:q])
     @articles = @q.result(distinct: true).page(params[:page])
   end
+
   def show
     @article = Article.find(params[:id])
-     @comment = Comment.new
+    @comment = Comment.new
+
   end
   def new
     @article = Article.new
@@ -27,6 +36,6 @@ class ArticlesController < ApplicationController
   protected
 
   def article_params
-    params.require(:article).permit(:title, :description)
+    params.require(:article).permit(:title, :description, :category_ids => [])
   end
 end

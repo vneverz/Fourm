@@ -1,5 +1,10 @@
 <p><%= link_to "回到首頁", articles_path, :class => "btn btn-primary" %></p>
 <h2><%= @article.title %> <small><%= @article.user.username %></small></h2>
+<p><% @article.categories.each do |a| %>
+  <%= a.name%>
+<% end %>
+</p>
+
 <%= user_gavatar(@article.user) %>
 
 <%= simple_format @article.description %>

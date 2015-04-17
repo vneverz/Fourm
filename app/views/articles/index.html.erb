@@ -6,8 +6,13 @@
   <%= f.label :title_cont %>
   <%= f.search_field :title_cont %>
   <%= f.submit %>
-
 <% end %>
+<p>
+<% Category.all.each do |c| %>
+  <%= link_to c.name, articles_path( :cid => c ) %>
+<% end %>
+</p>
+
 <p class="text-right">
 <%= sort_link(@q, :comments_count, "回覆數", default_order: :desc) %>
 <%= sort_link(@q, :created_at, "張貼時間", default_order: :desc) %>
