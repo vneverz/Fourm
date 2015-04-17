@@ -33,6 +33,10 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def about
+
+  end
+
   protected
 
   def article_params
