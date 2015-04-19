@@ -7,6 +7,7 @@
   <%= f.search_field :title_cont %>
   <%= f.submit %>
 <% end %>
+<p></p>
 <ul class="nav nav-tabs">
   <% Category.all.each do |c| %>
   <li role="presentation" class="<%= (params[:cid] == c.id.to_s) ? "active" : "" %>"><%= link_to c.name, articles_path( :cid => c ) %></li>
@@ -21,13 +22,19 @@
 </p>
   <th>標題</th>
   <th>作者</th>
+  <th>留言者</th>
   <th>發文時間</th>
   <th>留言</th>
 </tr>
 <% @articles.each do |t| %>
   <tr>
     <td><%= link_to t.title, article_path(t) %></td>
-    <td><%= link_to t.user.username,user_path(t.user) %></td>
+    <td><%= link_to t.user.username, user_path(t) %></td>
+    <td>
+       <% t.authors.each do |u| %>
+       <%= link_to u.username, user_path(u) %>
+       <% end %>
+    </td>
     <td><%= t.created_at.to_s(:short) %></td>
     <td><%= t.comments_count %></td>
   </tr>

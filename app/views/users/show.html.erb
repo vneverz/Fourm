@@ -13,9 +13,9 @@
 <h3>Comment list</h3>
 
 <ul>
-<% @user.comments.group(:topic_id).order("comments.id DESC").each do |c| %>
+<% @user.comments.group(:article_id).order("comments.id DESC").each do |c| %>
 
-  <li><%= link_to "Re: #{c.topic.title}", article_path(c.topic, :anchor => "comment-#{c.id}" ) %>
+  <li><%= link_to "Re: #{c.article.title}", article_path(c.article, :anchor => "comment-#{c.id}" ) %>
       at <%= c.created_at.to_s(:short) %>
   </li>
 
