@@ -27,7 +27,7 @@
 <% @articles.each do |t| %>
   <tr>
     <td><%= link_to t.title, article_path(t) %></td>
-    <td><%= t.user.username %></td>
+    <td><%= link_to t.user.username,user_path(t.user) %></td>
     <td><%= t.created_at.to_s(:short) %></td>
     <td><%= t.comments_count %></td>
   </tr>

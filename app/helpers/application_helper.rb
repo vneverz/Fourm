@@ -1,5 +1,5 @@
 module ApplicationHelper
   def user_gavatar(user)
-    image_tag user.gavatar_url, :class => "media-object", :width => "64", :alt => "user gavatar"
+    link_to image_tag(user.gavatar_url, :class => "media-object", :width => "64", :alt => "user avatar"), user_path(user)
   end
 end

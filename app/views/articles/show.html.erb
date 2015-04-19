@@ -39,7 +39,7 @@
 <hr>
 <% @article.comments.each do |comment| %>
 <% next if comment.new_record? %>
-<div class="media">
+<div class="media" id="comment-<%= comment.id %>" >
   <div class="media-left">
     <a href="#">
       <% if comment.user %>
@@ -63,4 +63,9 @@
   $("#comment-btn").click(function(){
     comment_form.slideToggle();
   })
+
+  var hash = window.location.hash.substring(1);
+  if (hash) {
+    $("#" + hash).css( { "background-color": "#eee" } );
+  }
 </script>
