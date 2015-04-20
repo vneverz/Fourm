@@ -9,4 +9,8 @@ class User < ActiveRecord::Base
     md5 = Digest::MD5.hexdigest(self.email.downcase)
     "https://www.gravatar.com/avatar/#{md5}"
   end
+  def is_admin?
+    #self.role == "admin"
+    false
+  end
 end

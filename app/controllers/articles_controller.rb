@@ -15,9 +15,16 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+
+    unless cookies["view-article-#{@article.id}"]
+      cookies["view-article-#{@article.id}"] = "true"
+      @article.view!
+    end
+
     @comment = Comment.new
 
   end
+
   def new
     @article = Article.new
   end
@@ -35,6 +42,16 @@ class ArticlesController < ApplicationController
 
   def about
 
+  end
+
+  def destroy
+    @article = Article.find(params[:id])
+
+    if @article.can_delete_by?(current_user)
+       @article.destroy
+    end
+
+    redirect_to articles_url
   end
 
   protected
