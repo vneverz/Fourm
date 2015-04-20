@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
     else
       @articles = Article.all
     end
+    @articles = @articles.only_published(current_user)
 
     @q = @articles.ransack(params[:q])
     @articles = @q.result(distinct: true).page(params[:page])
@@ -58,5 +59,6 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :description, :category_ids => [])
+    params.require(:article).permit(:title, :description, :status, :category_ids => [])
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420110311) do
+ActiveRecord::Schema.define(version: 20150420113621) do
 
   create_table "article_categories", force: :cascade do |t|
     t.integer  "article_id"
@@ -29,9 +29,10 @@ ActiveRecord::Schema.define(version: 20150420110311) do
     t.boolean  "is_public"
     t.integer  "comments_count"
     t.integer  "user_id"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
     t.integer  "views_count",    default: 0
+    t.string   "status",         default: "published"
   end
 
   add_index "articles", ["user_id"], name: "index_articles_on_user_id"

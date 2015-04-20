@@ -12,6 +12,10 @@ class Article < ActiveRecord::Base
     arr.uniq.first(n)
   end
 
+  def self.only_published(u)
+    where( ["status = ? OR ( status = ? AND user_id = ? )", "published", "draft", u.id ] )
+  end
+
   def view!
     self.increment!(:views_count)
   end
