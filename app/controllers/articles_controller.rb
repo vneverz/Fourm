@@ -4,6 +4,7 @@ class ArticlesController < ApplicationController
     respond_to do |format|
       format.html { render :layout => false }
       format.js
+      format.json { render :json => { :title => "TITLE", :description => "CONTENT" }.to_json }
     end
   end
 
