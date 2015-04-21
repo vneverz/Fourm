@@ -31,7 +31,7 @@
 
 <div id="comment-form">
 
-<%= form_for [@article, @comment] do |f| %>
+<%= form_for [@article, @comment],:remote => true do |f| %>
 
   <% if @comment.errors.any? %>
     <ul>
@@ -54,30 +54,12 @@
 </div>
 
 <hr>
-<% @article.comments.each do |comment| %>
-<% next if comment.new_record? %>
-<div class="media" id="comment-<%= comment.id %>" >
-  <div class="media-left">
-    <a href="#">
-      <% if comment.user %>
-        <%= user_gavatar comment.user %>
-      <% end %>
-    </a>
-  </div>
-  <div class="media-body">
-    <h4 class="media-heading"><%= comment.user.username %></h4>
-    <%= simple_format comment.content %>
-    <p class="text-right">
-      <%= comment.created_at.to_s(:short) %>
-
-      <% if comment.can_delete_by?(current_user) %>
-        <%= link_to "Ajax Delete", article_comment_path(@article, comment), :method => :delete, :remote => true %>
-      <% end %>
-    </p>
-  </div>
+<div id="comments">
+  <% @article.comments.each do |comment| %>
+  <% next if comment.new_record? %>
+  <%= render :partial => "comments/comment", :locals => { :comment => comment } %>
+  <% end %>
 </div>
-
-<% end %>
 <script>
   var comment_form = $("#comment-form")
   <% unless @comment.errors.any? %>

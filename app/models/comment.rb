@@ -6,5 +6,8 @@ class Comment < ActiveRecord::Base
   def can_delete_by?(u)
      ( self.user == u ) || (u && u.is_admin?)
   end
+  def author_name
+    user.try(:display_name) || "Nobody"
+  end
 
 end
