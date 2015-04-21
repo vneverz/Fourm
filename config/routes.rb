@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   # You can have the root of your site routed with "root"
   # 利用collection製作出客制的頁面
+  get "/ajaxtest" => "articles#ajaxtest"
+
   get "/about" => "articles#about"
 
   root 'articles#index'

@@ -1,7 +1,15 @@
 class ArticlesController < ApplicationController
    before_action :authenticate_user!, :only => [:new, :create, :destroy]
+  def ajaxtest
+    respond_to do |format|
+      format.html { render :layout => false }
+      format.js
+    end
+  end
+
   def index
     @q = Article.ransack(params[:q])
+
     if params[:cid&& params[:cid] != "0"]
       category = Category.find(params[:cid])
       @articles = category.articles
@@ -60,7 +68,6 @@ class ArticlesController < ApplicationController
   protected
 
   def article_params
-    params.require(:article).permit(:title, :description, :category_ids => [])
     params.require(:article).permit(:title, :description, :status, :category_ids => [])
   end
 end
