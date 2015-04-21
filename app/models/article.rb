@@ -12,8 +12,12 @@ class Article < ActiveRecord::Base
     arr.uniq.first(n)
   end
 
-  def self.only_published(u)
-    where( ["status = ? OR ( status = ? AND user_id = ? )", "published", "draft", u.id ] )
+  def self.only_published(user)
+    if user
+    where( ["status = ? OR ( status = ? AND user_id = ? )", "published", "draft", user.id ] )
+    else
+    where( :status => "published" )
+    end
   end
 
   def view!
@@ -27,7 +31,7 @@ class Article < ActiveRecord::Base
   # end
 
   def can_delete_by?(u)
-   ( self.user == u ) || (u.is_admin?)
+   ( self.user == u ) || (u&&u.is_admin?)
   end
 
 end

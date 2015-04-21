@@ -2,9 +2,11 @@ class ArticlesController < ApplicationController
    before_action :authenticate_user!, :only => [:new, :create, :destroy]
   def index
     @q = Article.ransack(params[:q])
-    if params[:cid]
+    if params[:cid&& params[:cid] != "0"]
       category = Category.find(params[:cid])
       @articles = category.articles
+    elsif params[:cid] == "0"
+      @articles = Article.joins("LEFT OUTER JOIN article_categories ON articles.id = article_categories.article_id").group("articles.id").having("count(article_categories.category_id) = 0")
     else
       @articles = Article.all
     end
