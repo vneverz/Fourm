@@ -11,7 +11,7 @@ class ArticlesController < ApplicationController
   def index
     @q = Article.ransack(params[:q])
 
-    if params[:cid&& params[:cid] != "0"]
+    if params[:cid]&& params[:cid] != "0"
       category = Category.find(params[:cid])
       @articles = category.articles
     elsif params[:cid] == "0"
@@ -20,7 +20,6 @@ class ArticlesController < ApplicationController
       @articles = Article.all
     end
     @articles = @articles.only_published(current_user)
-
     @q = @articles.ransack(params[:q])
     @articles = @q.result(distinct: true).page(params[:page])
   end
